@@ -1,6 +1,7 @@
 ﻿using com.sun.tools.@internal.xjc.reader.gbind;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace SpecFlowDemoProject1.Pom
 {
-    internal class pom1
+    public class pom1
     {
-        private IWebDriver driver;
+        public IWebDriver _driver;
+
         public void scrolldown_element(IWebDriver driver, IWebElement element)
         {
             try
@@ -120,5 +122,22 @@ namespace SpecFlowDemoProject1.Pom
                 throw e;
             }
         }
+        public void screenShot(IWebDriver driver, IWebElement filename , string name)
+        {
+            try
+            {
+                Screenshot screenshot = ((ITakesScreenshot)driver).GetScreenshot();
+                string title = ScenarioContext.Current.ScenarioInfo.Title;
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+                string ssFileName = "C:\\Users\\HariharanNagarajan\\source\\repos\\SpecFlowDemoProject1\\SpecFlowDemoProject1\\Screenshot\\" + name + " " + timestamp + ".png";
+                screenshot.SaveAsFile(ssFileName);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
     }
-}
+    }
